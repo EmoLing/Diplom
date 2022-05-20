@@ -1,16 +1,41 @@
-﻿namespace Ads.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Ads.Models
 {
-    internal class Ad : IAd
+    public class Ad : IAd
     {
+        [Key]
         public Guid Guid { get; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<byte[]> Photos { get; set; }
+        public IEnumerable<Image> Photos { get; set; }
         public TypeAd TypeAd { get; private set; }
         public Guid UserGuid { get; }
         public AdCoordinates Coordinates { get; set; }
         public StatusAd StatusAd { get; private set; }
 
+        public Ad()
+        { 
+            Guid = Guid.NewGuid();
+            UserGuid = Guid.NewGuid();
+            TypeAd = 0;
+            StatusAd = StatusAd.New;
+
+            Photos = new List<Image>()
+            { new Image(Guid) { ImageHash = new byte[5] } };
+
+            Coordinates = new AdCoordinates()
+            {
+                AdGuid = Guid,
+                Latitude = 44,
+                Longitude = 55,
+            };
+
+            Name = "ttt";
+            Description = "gggf";
+        }
 
         public Ad(Guid userGuid, TypeAd typeAd)
         {
@@ -25,12 +50,5 @@
         public void Close() => StatusAd = StatusAd.Closed;
 
         public void Archiving() => StatusAd = StatusAd.Archived;
-
-
-        public class AdCoordinates
-        {
-            public decimal Latitude { get; set; }
-            public decimal Longitude { get; set; }
-        }
     }
 }

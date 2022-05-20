@@ -1,21 +1,47 @@
-﻿using Ads.Models;
-using Ads.Repository;
+﻿using Ads.Repository;
 using Microsoft.AspNetCore.Mvc;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ads.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class AdsController : Controller
+    [ApiController]
+    public class AdsController : ControllerBase
     {
         private readonly IAdsRepository _adsRepository;
-
-        public AdsController(IAdsRepository AdsRepository) { _adsRepository = AdsRepository; }
-
-        [HttpGet]
-        public IEnumerable<Ad> GetFindAds()
+        public AdsController(IAdsRepository adsRepository)
         {
-            return new List<Ad>();
+            _adsRepository = adsRepository;
+        }
+
+        // GET: api/<AdsController>
+        [HttpGet]
+        public IActionResult Get() => new OkObjectResult(_adsRepository.GetAds());
+
+        // GET api/<AdsController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<AdsController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<AdsController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<AdsController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
