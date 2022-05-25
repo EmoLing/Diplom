@@ -1,4 +1,6 @@
 ﻿using Ads.Repository;
+using Ads.ViewModel;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,9 +30,13 @@ namespace Ads.Controllers
 
         // POST api/<AdsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("CreateAd")]
+        public IActionResult CreateAd([FromForm] AdViewModel adViewModel)
         {
+            adViewModel.ToString();
+            return new OkResult();
         }
+
 
         // PUT api/<AdsController>/5
         [HttpPut("{id}")]

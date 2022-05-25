@@ -3,24 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration", "Registration\Registration.csproj", "{39CAF59C-C6D5-4758-8F85-991F218FCBD2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ads", "Ads\Ads.csproj", "{AB50CA53-5E83-4A44-85BC-265E80823C38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ads", "Ads\Ads.csproj", "{AB50CA53-5E83-4A44-85BC-265E80823C38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelectionAds", "SelectionAds\SelectionAds.csproj", "{F9672706-6E56-4C12-90F6-EEA38E053B9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SelectionAds", "SelectionAds\SelectionAds.csproj", "{F9672706-6E56-4C12-90F6-EEA38E053B9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interaction", "Interaction\Interaction.csproj", "{9727B1F3-8847-4CA9-8D26-F6DA011C4AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interaction", "Interaction\Interaction.csproj", "{9727B1F3-8847-4CA9-8D26-F6DA011C4AE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{F628769B-02E2-438A-AB3E-6536B241176E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{F628769B-02E2-438A-AB3E-6536B241176E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Middleware", "Middleware\Middleware.csproj", "{DBFE91DC-1000-4AF2-8426-2EBA540B912B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware", "Middleware\Middleware.csproj", "{DBFE91DC-1000-4AF2-8426-2EBA540B912B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A233E4A6-E3FD-4031-BCF4-CF8958B76572}"
 	ProjectSection(SolutionItems) = preProject
 		TODO.txt = TODO.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{A1943AD3-4050-4110-B14E-F27713825199}"
+	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{F596D0DF-CD13-4BAA-9848-292392B21B5E}"
+	ProjectSection(SolutionItems) = preProject
+		main.js = main.js
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserProfile", "UserProfile\UserProfile.csproj", "{004FFCD8-998E-41CB-B7CD-C255129D1E5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +38,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{39CAF59C-C6D5-4758-8F85-991F218FCBD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39CAF59C-C6D5-4758-8F85-991F218FCBD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39CAF59C-C6D5-4758-8F85-991F218FCBD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39CAF59C-C6D5-4758-8F85-991F218FCBD2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB50CA53-5E83-4A44-85BC-265E80823C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB50CA53-5E83-4A44-85BC-265E80823C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB50CA53-5E83-4A44-85BC-265E80823C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,15 +58,20 @@ Global
 		{DBFE91DC-1000-4AF2-8426-2EBA540B912B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBFE91DC-1000-4AF2-8426-2EBA540B912B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBFE91DC-1000-4AF2-8426-2EBA540B912B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{39CAF59C-C6D5-4758-8F85-991F218FCBD2} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 		{AB50CA53-5E83-4A44-85BC-265E80823C38} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 		{F9672706-6E56-4C12-90F6-EEA38E053B9A} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 		{9727B1F3-8847-4CA9-8D26-F6DA011C4AE2} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
+		{F596D0DF-CD13-4BAA-9848-292392B21B5E} = {A1943AD3-4050-4110-B14E-F27713825199}
+		{004FFCD8-998E-41CB-B7CD-C255129D1E5F} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0A559DB-2572-443E-9CAE-E7F32CDD3DD9}

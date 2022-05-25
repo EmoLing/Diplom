@@ -8,8 +8,6 @@ namespace Ads.DbContexts
         public AdContext(DbContextOptions<AdContext> options) : base(options) 
         {
             Database.EnsureCreated();
-            Ads.Add(new Ad());
-            this.SaveChanges();
         }
 
         public DbSet<Ad> Ads { get; set; }
