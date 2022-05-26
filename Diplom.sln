@@ -18,19 +18,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A233E4A6-E3FD-4031-BCF4-CF8958B76572}"
 	ProjectSection(SolutionItems) = preProject
 		TODO.txt = TODO.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{A1943AD3-4050-4110-B14E-F27713825199}"
-	ProjectSection(SolutionItems) = preProject
-		index.html = index.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{F596D0DF-CD13-4BAA-9848-292392B21B5E}"
-	ProjectSection(SolutionItems) = preProject
-		main.js = main.js
+		WhatIDid.txt = WhatIDid.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserProfile", "UserProfile\UserProfile.csproj", "{004FFCD8-998E-41CB-B7CD-C255129D1E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp", "ClientApp\ClientApp.csproj", "{5A42A997-26E5-4BBC-B6AC-301596318FFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +55,10 @@ Global
 		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{004FFCD8-998E-41CB-B7CD-C255129D1E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A42A997-26E5-4BBC-B6AC-301596318FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A42A997-26E5-4BBC-B6AC-301596318FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A42A997-26E5-4BBC-B6AC-301596318FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A42A997-26E5-4BBC-B6AC-301596318FFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,7 +67,6 @@ Global
 		{AB50CA53-5E83-4A44-85BC-265E80823C38} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 		{F9672706-6E56-4C12-90F6-EEA38E053B9A} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 		{9727B1F3-8847-4CA9-8D26-F6DA011C4AE2} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
-		{F596D0DF-CD13-4BAA-9848-292392B21B5E} = {A1943AD3-4050-4110-B14E-F27713825199}
 		{004FFCD8-998E-41CB-B7CD-C255129D1E5F} = {63B6C26E-02FD-4FB8-AACA-CD81E9A6A731}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

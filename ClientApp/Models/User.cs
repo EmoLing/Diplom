@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace UserProfile.Model
+﻿namespace ClientApp.Models
 {
-    //public class User : IdentityUser
     public class User
     {
         public string Login { get; set; }

@@ -31,7 +31,7 @@ namespace Ads.Controllers
         // POST api/<AdsController>
         [HttpPost]
         [Route("CreateAd")]
-        public IActionResult CreateAd([FromForm] AdViewModel adViewModel)
+        public IActionResult CreateAd([FromBody]AdViewModel adViewModel)
         {
             adViewModel.ToString();
             return new OkResult();
