@@ -1,5 +1,5 @@
-﻿using UserProfile.Model;
-using UserProfile.ViewModel;
+﻿using Helper.Users.ViewModels;
+using UserProfile.Model;
 
 namespace UserProfile.Repository
 {

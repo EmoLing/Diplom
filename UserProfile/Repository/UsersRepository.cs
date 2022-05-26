@@ -1,6 +1,6 @@
-﻿using UserProfile.DbContexts;
+﻿using Helper.Users.ViewModels;
+using UserProfile.DbContexts;
 using UserProfile.Model;
-using UserProfile.ViewModel;
 
 namespace UserProfile.Repository
 {

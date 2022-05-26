@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Helper.Users.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using UserProfile.Model;
 using UserProfile.Repository;
-using UserProfile.ViewModel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UserProfile.ViewModel
+namespace Helper.Users.ViewModels
 {
-    //public class User : IdentityUser
     public class UserViewModel
     {
         public string Login { get; set; }
@@ -13,5 +16,7 @@ namespace UserProfile.ViewModel
             Login = login;
             Password = password;
         }
+
+        public UserViewModel() { }
     }
 }

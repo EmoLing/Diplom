@@ -1,6 +1,10 @@
 ﻿using ClientApp.Models;
+using Helper.Users.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ClientApp.Controllers
 {
@@ -13,10 +17,10 @@ namespace ClientApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
+
+        [HttpGet("index")]
+        public IActionResult MainPage() => View("Index");
 
         public IActionResult Privacy()
         {
@@ -28,7 +32,7 @@ namespace ClientApp.Controllers
         public IActionResult AdsMap() => View("AdsMap");
         public IActionResult LoginView() => View("Login");
 
-        public async Task<IActionResult> SendRegistrate(RegistrateUser registrateUser)
+        public async Task<IActionResult> SendRegistrate(RegistrateUserViewModel registrateUser)
         {
             using var httpClient = new HttpClient();
             using var result = await httpClient
@@ -40,16 +44,34 @@ namespace ClientApp.Controllers
             return View("Registration");
         }
 
-        public async Task<IActionResult> Login(User user)
+        public async Task<IActionResult> Login(UserViewModel user)
         {
+            ViewBag.Result = String.Empty;
+
             using var httpClient = new HttpClient();
             using var result = await httpClient
                 .PostAsJsonAsync("https://localhost:7165/api/user/Login", user);
 
-            ViewBag.Result = result.StatusCode == System.Net.HttpStatusCode.OK ? "Регистрация прошла успешно"
-                : "Во время регистрации возникли ошибки";
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                ViewBag.Result = "Во время регистрации возникли ошибки";
+                return View("Login");
+            }
 
-            return View("Login");
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Login) };
+            var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+
+            return Redirect("/index");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return Redirect("/index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

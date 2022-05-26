@@ -18,23 +18,6 @@ namespace Ads.Models
 
         public Ad()
         { 
-            Guid = Guid.NewGuid();
-            UserGuid = Guid.NewGuid();
-            TypeAd = 0;
-            StatusAd = StatusAd.New;
-
-            Photos = new List<Image>()
-            { new Image(Guid) { ImageHash = new byte[5] } };
-
-            Coordinates = new AdCoordinates()
-            {
-                AdGuid = Guid,
-                Latitude = 44,
-                Longitude = 55,
-            };
-
-            Name = "ttt";
-            Description = "gggf";
         }
 
         public Ad(Guid userGuid, TypeAd typeAd)

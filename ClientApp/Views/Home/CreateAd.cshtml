@@ -1,0 +1,22 @@
+﻿<section>
+    <div class="container">
+        <form asp-action="" asp-controller="Home" asp-antiforgery="true">
+            <label>Название</label>
+            <input type="text" name="name" />
+            <br />
+            <label>Описание</label>
+            <input type="text" name="description" />
+            <br />
+            <label>Выбрать фотографии</label>
+            <input type="file" name="images" multiple/>
+            <br />
+            <label>Фамилия</label>
+            <input type="text" name="lastname" />
+            <br />
+            <label>E-mail</label>
+            <input type="email" name="email" />
+            <br />
+            <input type="submit" />
+        </form>
+    </div>
+</section>
