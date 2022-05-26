@@ -1,4 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
+using UserProfile.DbContexts;
+using UserProfile.Repository;
+
 string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +22,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+string connectionString = builder.Configuration.GetConnectionString("UsersDb");
+
+builder.Services.AddDbContext<UserContext>(o
+    => o.UseSqlServer(connectionString));
+builder.Services.AddTransient<IUsersRepository, UsersRepository>();
 
 var app = builder.Build();
 

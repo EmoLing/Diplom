@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserProfile.Model;
+using UserProfile.Repository;
+using UserProfile.ViewModel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,9 +11,10 @@ namespace UserProfile
     [ApiController]
     public class UserController : ControllerBase
     {
-        public UserController()
+        private readonly IUsersRepository _usersRepository;
+        public UserController(IUsersRepository usersRepository)
         {
-
+            _usersRepository = usersRepository;
         }
         // GET: api/<UserController>
         [HttpGet]
@@ -27,20 +30,40 @@ namespace UserProfile
             return "value";
         }
 
-        // POST api/<UserController>
+        // POST api/<UserController>/Registration
         [HttpPost]
         [Route("Registration")]
-        public IActionResult Registration(User user)
+        public IActionResult Registration(RegistrateUserViewModel registrateUserViewModel)
         {
-            return user is null ? BadRequest() : Ok(); 
+            if (registrateUserViewModel is null)
+                BadRequest();
+
+            var user = new SimpleUser(registrateUserViewModel.Login, registrateUserViewModel.Password)
+            {
+                FirstName = registrateUserViewModel.FirstName,
+                LastName = registrateUserViewModel.LastName,
+                Email = registrateUserViewModel.Email,
+            };
+
+            try
+            {
+                _usersRepository.CreateUser(user);
+            }
+            catch (Exception ex)
+            {
+                return ValidationProblem(ex.Message);
+            }
+
+            return Ok();
         }
 
-        // POST api/<UserController>
+        // POST api/<UserController>/Login
         [HttpPost]
-        [Route("Registration1")]
-        public IActionResult Registration()
+        [Route("Login")]
+        public IActionResult Login(UserViewModel userViewModel)
         {
-            return Ok();
+            var user = _usersRepository.FindUser(userViewModel);
+            return user is null ? ValidationProblem("Пользователь не найден") : Ok();
         }
 
         // PUT api/<UserController>/5
