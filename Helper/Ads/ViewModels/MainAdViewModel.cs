@@ -9,7 +9,7 @@ namespace Helper.Ads.ViewModels
         public string KindOfAnimal { get; set; }
         public string Color { get; set; }
         public TypeAd TypeAd { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

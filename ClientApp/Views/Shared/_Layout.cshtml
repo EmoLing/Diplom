@@ -8,16 +8,16 @@
     <title>Диплом</title>
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=API_KEY&lang=ru_RU" type="text/javascript">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=c5478f24-6c68-4155-a9bd-78cd96cca754&lang=ru_RU" type="text/javascript">
     </script>
-    <script src="/js/scripts.js" type="text/javascript"></script>
+    <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
     <header class="header">
         <div class="container flex header-container">
             <div class="header-upper-content flex">
-                <a href="#" class="header-logo">
+                <a href="@Url.Action("Index")" class="header-logo">
                     <img src="/img/logo.png" alt="logo" class="header-logo-image">
                 </a>
             </div>
@@ -25,12 +25,12 @@
                 <nav class="header-nav flex">
                     <ul class="list-resert header-list flex">
                         <li class="header-list-item">
-                            <a href="#" class="header-link">
+                            <a href="@Url.Action("Index")" class="header-link">
                                 Главная
                             </a>
                         </li>
                         <li class="header-list-item">
-                            <a href="#about-us" class="header-link">
+                            <a href="@Url.Action("AboutUs")" class="header-link">
                                 О&nbsp;нас
                             </a>
                         </li>
@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="header-list-item">
-                            <a href="#contacts" class="header-link">
+                            <a href="@Url.Action("Contacts")" class="header-link">
                                 Контакты
                             </a>
                         </li>
@@ -71,7 +71,6 @@
     </main>
     <footer>
     </footer>
-    <script src="/js/maps.js" type="text/javascript"></script>
 </body>
 
 </html>

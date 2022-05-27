@@ -14,7 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A233E4A6-E3FD-4031-BCF4-CF8958B76572}"
 	ProjectSection(SolutionItems) = preProject
 		TODO.txt = TODO.txt
-		WhatIDid.txt = WhatIDid.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserProfile", "UserProfile\UserProfile.csproj", "{004FFCD8-998E-41CB-B7CD-C255129D1E5F}"
@@ -23,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "ClientApp\Clie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{952AAA65-2877-4D55-9F90-58F9A198E62B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datebase", "Datebase\Datebase.csproj", "{3F60E16E-405B-4380-BF81-F608D0DB51A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Datebase", "Datebase\Datebase.csproj", "{3F60E16E-405B-4380-BF81-F608D0DB51A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

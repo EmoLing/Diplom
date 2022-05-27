@@ -15,5 +15,21 @@ namespace Ads.Models
             AdGuid = adGuid;
             Guid = Guid.NewGuid();
         }
+
+        public static decimal GetDecimalFromString(string @string)
+        {
+            if (string.IsNullOrWhiteSpace(@string))
+                return 0;
+
+            if (Decimal.TryParse(@string, out decimal result)
+                || Decimal.TryParse(@string.Replace(',', '.'), out result)
+                || Decimal.TryParse(@string.Replace('.', ','), out result))
+            {
+                return result;
+            }
+
+
+            throw new Exception("Не удалось распарсить строку");
+        }
     }
 }

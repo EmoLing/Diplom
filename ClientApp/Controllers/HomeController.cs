@@ -1,5 +1,4 @@
 ﻿using ClientApp.Models;
-using Helper;
 using Helper.Ads.ViewModels;
 using Helper.Users.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -40,6 +39,9 @@ namespace ClientApp.Controllers
 
             return Redirect("/home/LoginView");
         }
+
+        public IActionResult AboutUs() => NotFound();
+        public IActionResult Contacts() => NotFound();
 
         public async Task<IActionResult> SendRegistrate(RegistrateUserViewModel registrateUser)
         {
@@ -102,8 +104,8 @@ namespace ClientApp.Controllers
             using var result = await httpClient
                 .PostAsJsonAsync("https://localhost:7155/api/Ads/CreateAd", adViewModel);
 
-            if (result.StatusCode is System.Net.HttpStatusCode.OK)
-                return Error();
+            if (result.StatusCode is not System.Net.HttpStatusCode.OK)
+                return Problem(result.Content.ToString());
 
             return Redirect("/home/AdsMap");
         }

@@ -46,8 +46,8 @@ namespace Ads.Controllers
 
             ad.Coordinates = new AdCoordinates(ad.Guid)
             {
-                Latitude = adViewModel.Latitude,
-                Longitude = adViewModel.Longitude,
+                Latitude = AdCoordinates.GetDecimalFromString(adViewModel.Latitude),
+                Longitude = AdCoordinates.GetDecimalFromString(adViewModel.Longitude),
             };
 
             var images = new List<Image>(adViewModel.Photo.Count);
@@ -62,7 +62,7 @@ namespace Ads.Controllers
             }
             catch (Exception ex)
             {
-                return ValidationProblem(ex.Message);
+                return Problem(ex.Message);
             }
 
             return Ok();
