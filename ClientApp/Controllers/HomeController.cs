@@ -1,7 +1,10 @@
 ﻿using ClientApp.Models;
+using Helper;
+using Helper.Ads.ViewModels;
 using Helper.Users.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -28,9 +31,15 @@ namespace ClientApp.Controllers
         }
 
         public IActionResult Registration() => View("Registration");
-
         public IActionResult AdsMap() => View("AdsMap");
         public IActionResult LoginView() => View("Login");
+        public IActionResult CreateAdView()
+        {
+            if (User.Identity.IsAuthenticated)
+                return View("CreateAd");
+
+            return Redirect("/home/LoginView");
+        }
 
         public async Task<IActionResult> SendRegistrate(RegistrateUserViewModel registrateUser)
         {
@@ -43,6 +52,8 @@ namespace ClientApp.Controllers
 
             return View("Registration");
         }
+
+        #region Login/Logout
 
         public async Task<IActionResult> Login(UserViewModel user)
         {
@@ -74,10 +85,42 @@ namespace ClientApp.Controllers
             return Redirect("/index");
         }
 
+        #endregion
+
+        [Authorize]
+        public async Task<IActionResult> CreateAd(CreateAdViewModel createAdViewModel)
+        {
+            string request = "https://localhost:7165/api/user/" +
+                '{' + User.Identity.Name + '}';
+
+            var guid = await GetRequest<Guid>(request);
+
+            var adViewModel = (AdViewModel)createAdViewModel;
+            adViewModel.UserGuid = guid;
+
+            using var httpClient = new HttpClient();
+            using var result = await httpClient
+                .PostAsJsonAsync("https://localhost:7155/api/Ads/CreateAd", adViewModel);
+
+            if (result.StatusCode is System.Net.HttpStatusCode.OK)
+                return Error();
+
+            return Redirect("/home/AdsMap");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private async Task<T> GetRequest<T>(string url)
+        {
+            using var httpClient = new HttpClient();
+            var result = await httpClient
+                .GetFromJsonAsync<T>(url, CancellationToken.None);
+
+            return result;
         }
     }
 }

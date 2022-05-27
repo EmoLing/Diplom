@@ -24,11 +24,8 @@ namespace UserProfile
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        [HttpGet("{login}")]
+        public Guid Get(string login) =>_usersRepository.GetUserGuid(login.Trim('{', '}'));
 
         // POST api/<UserController>/Registration
         [HttpPost]

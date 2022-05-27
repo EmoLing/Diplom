@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserProfile", "UserProfile\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "ClientApp\ClientApp.csproj", "{5A42A997-26E5-4BBC-B6AC-301596318FFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{952AAA65-2877-4D55-9F90-58F9A198E62B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helper", "Helper\Helper.csproj", "{952AAA65-2877-4D55-9F90-58F9A198E62B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datebase", "Datebase\Datebase.csproj", "{3F60E16E-405B-4380-BF81-F608D0DB51A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{952AAA65-2877-4D55-9F90-58F9A198E62B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952AAA65-2877-4D55-9F90-58F9A198E62B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952AAA65-2877-4D55-9F90-58F9A198E62B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F60E16E-405B-4380-BF81-F608D0DB51A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F60E16E-405B-4380-BF81-F608D0DB51A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F60E16E-405B-4380-BF81-F608D0DB51A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F60E16E-405B-4380-BF81-F608D0DB51A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

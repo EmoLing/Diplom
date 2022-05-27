@@ -1,8 +1,8 @@
 ﻿using Ads.Repository;
-using Ads.ViewModel;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-
+using Helper.Ads.ViewModels;
+using Ads.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ads.Controllers
@@ -31,10 +31,41 @@ namespace Ads.Controllers
         // POST api/<AdsController>
         [HttpPost]
         [Route("CreateAd")]
-        public IActionResult CreateAd([FromBody]AdViewModel adViewModel)
+        public IActionResult CreateAd(AdViewModel adViewModel)
         {
-            adViewModel.ToString();
-            return new OkResult();
+            if (adViewModel is null)
+                return BadRequest();
+
+            var ad = new Ad(adViewModel.UserGuid, adViewModel.TypeAd)
+            {
+                Name = adViewModel.Name,
+                Description = adViewModel.Description,
+                KindOfAnimal = adViewModel.KindOfAnimal,
+                Color = adViewModel.Color,
+            };
+
+            ad.Coordinates = new AdCoordinates(ad.Guid)
+            {
+                Latitude = adViewModel.Latitude,
+                Longitude = adViewModel.Longitude,
+            };
+
+            var images = new List<Image>(adViewModel.Photo.Count);
+            foreach (var image in adViewModel.Photo)
+                images.Add(new Image(ad.Guid) { ImageHash = image });
+
+            ad.Photo = images;
+
+            try
+            {
+                _adsRepository.CreateAd(ad);
+            }
+            catch (Exception ex)
+            {
+                return ValidationProblem(ex.Message);
+            }
+
+            return Ok();
         }
 
 

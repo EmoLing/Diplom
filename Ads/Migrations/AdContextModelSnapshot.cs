@@ -28,10 +28,18 @@ namespace Ads.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CoordinatesAdGuid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KindOfAnimal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -47,18 +55,16 @@ namespace Ads.Migrations
 
                     b.HasKey("Guid");
 
-                    b.HasIndex("CoordinatesAdGuid");
-
                     b.ToTable("Ads");
                 });
 
             modelBuilder.Entity("Ads.Models.AdCoordinates", b =>
                 {
-                    b.Property<Guid>("AdGuid")
+                    b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Guid")
+                    b.Property<Guid>("AdGuid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Latitude")
@@ -67,7 +73,10 @@ namespace Ads.Migrations
                     b.Property<decimal>("Longitude")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("AdGuid");
+                    b.HasKey("Guid");
+
+                    b.HasIndex("AdGuid")
+                        .IsUnique();
 
                     b.ToTable("AdCoordinates");
                 });
@@ -89,24 +98,22 @@ namespace Ads.Migrations
 
                     b.HasIndex("AdGuid");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("Ads.Models.Ad", b =>
+            modelBuilder.Entity("Ads.Models.AdCoordinates", b =>
                 {
-                    b.HasOne("Ads.Models.AdCoordinates", "Coordinates")
-                        .WithMany()
-                        .HasForeignKey("CoordinatesAdGuid")
+                    b.HasOne("Ads.Models.Ad", null)
+                        .WithOne("Coordinates")
+                        .HasForeignKey("Ads.Models.AdCoordinates", "AdGuid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Coordinates");
                 });
 
             modelBuilder.Entity("Ads.Models.Image", b =>
                 {
                     b.HasOne("Ads.Models.Ad", null)
-                        .WithMany("Photos")
+                        .WithMany("Photo")
                         .HasForeignKey("AdGuid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -114,7 +121,10 @@ namespace Ads.Migrations
 
             modelBuilder.Entity("Ads.Models.Ad", b =>
                 {
-                    b.Navigation("Photos");
+                    b.Navigation("Coordinates")
+                        .IsRequired();
+
+                    b.Navigation("Photo");
                 });
 #pragma warning restore 612, 618
         }

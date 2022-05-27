@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Helper.Images;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ads.Models
 {
@@ -14,6 +15,5 @@ namespace Ads.Models
             Guid = Guid.NewGuid();
             AdGuid = adGuid;
         }
-
     }
 }

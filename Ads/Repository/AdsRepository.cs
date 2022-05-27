@@ -11,6 +11,15 @@ namespace Ads.Repository
             _dbContext = adContext;
         }
 
+        public void CreateAd(Ad ad)
+        {
+            _dbContext.Ads.Add(ad);
+            _dbContext.Images.AddRange(ad.Photo);
+            _dbContext.AdCoordinates.Add(ad.Coordinates);
+
+            _dbContext.SaveChanges();
+        }
+
         public void Close(Guid adGuid)
         {
             throw new NotImplementedException();

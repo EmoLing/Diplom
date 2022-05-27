@@ -12,5 +12,6 @@ namespace UserProfile.Repository
         public void DeleteUser(User user);
         public IEnumerable<User> GetUsers();
         public User FindUser(UserViewModel userViewModel);
+        public Guid GetUserGuid(string login);
     }
 }

@@ -11,12 +11,14 @@ namespace Ads.DbContexts
         }
 
         public DbSet<Ad> Ads { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<AdCoordinates> AdCoordinates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ad>().HasKey(a => a.Guid);
             modelBuilder.Entity<Image>().HasKey(a => a.Guid);
-            modelBuilder.Entity<AdCoordinates>().HasKey(a => a.AdGuid);
+            modelBuilder.Entity<AdCoordinates>().HasKey(c => c.Guid);
         }
     }
 }

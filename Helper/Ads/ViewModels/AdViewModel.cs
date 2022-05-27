@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Helper.Ads.ViewModels
+﻿namespace Helper.Ads.ViewModels
 {
-    internal class AdViewModel
+    public class AdViewModel : MainAdViewModel
     {
+        public Guid UserGuid { get; set; }
+        public IList<byte[]> Photo { get; set; }
     }
 }

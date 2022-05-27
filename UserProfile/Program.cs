@@ -1,4 +1,5 @@
 
+using Helper.Database;
 using Microsoft.EntityFrameworkCore;
 using UserProfile.DbContexts;
 using UserProfile.Repository;
@@ -22,7 +23,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string connectionString = builder.Configuration.GetConnectionString("UsersDb");
+string connectionString = DbHelper.GetTrueConnectionString(builder.Configuration.GetConnectionString("Db")
+    , AppDomain.CurrentDomain.BaseDirectory);
 
 builder.Services.AddDbContext<UserContext>(o
     => o.UseSqlServer(connectionString));

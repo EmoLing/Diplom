@@ -1,5 +1,6 @@
 using Ads.DbContexts;
 using Ads.Repository;
+using Helper.Database;
 using Microsoft.EntityFrameworkCore;
 
 string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -19,7 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-string connectionString = builder.Configuration.GetConnectionString("AdsDb");
+string connectionString = DbHelper.GetTrueConnectionString(builder.Configuration.GetConnectionString("Db")
+    , AppDomain.CurrentDomain.BaseDirectory);
 
 builder.Services.AddDbContext<AdContext>(o
     => o.UseSqlServer(connectionString));

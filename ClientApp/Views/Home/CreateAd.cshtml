@@ -1,22 +1,32 @@
 ﻿<section>
     <div class="container">
-        <form asp-action="" asp-controller="Home" asp-antiforgery="true">
+        <form asp-action="CreateAd" asp-controller="Home" asp-antiforgery="true" enctype="multipart/form-data">
             <label>Название</label>
             <input type="text" name="name" />
             <br />
             <label>Описание</label>
             <input type="text" name="description" />
             <br />
+            <label>Вид животного</label>
+            <input type="text" name="kindofanimal" />
+            <br />
+            <label>Окрас</label>
+            <input type="text" name="color" />
+            <br />
             <label>Выбрать фотографии</label>
-            <input type="file" name="images" multiple/>
+            <input type="file" accept=".jpg,.jpeg,.png" name="photo" multiple />
             <br />
-            <label>Фамилия</label>
-            <input type="text" name="lastname" />
-            <br />
-            <label>E-mail</label>
-            <input type="email" name="email" />
+            <p>Выберите тип объявления:</p>
+            <div>
+                <input type="radio" id="loss" name="typead" value="loss" />
+                <label for="loss">Потеря</label>
+                <input type="radio" id="find" name="typead" value="find" />
+                <label for="find">Находка</label>
+            </div>
+            <button>Показать схожие объявлния</button>
             <br />
             <input type="submit" />
+            <input type="reset" />
         </form>
     </div>
 </section>

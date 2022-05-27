@@ -68,5 +68,11 @@ namespace UserProfile.Repository
         public User FindUser(UserViewModel userViewModel)
             =>_dbContext.Users.FirstOrDefault(u
                 => u.Login == userViewModel.Login && u.Password == userViewModel.Password);
+
+        public Guid GetUserGuid(string login)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Login == login);
+            return user is not null ? user.Guid : Guid.Empty;
+        }
     }
 }
