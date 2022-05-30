@@ -2,75 +2,100 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Диплом</title>
-    <link rel="stylesheet" href="/css/normalize.css">
+    <title>Lbgkjv</title>
+    <meta name="description" content="Крутой фреймворк UIkit 3">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/uikit.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=c5478f24-6c68-4155-a9bd-78cd96cca754&lang=ru_RU" type="text/javascript">
+    <script src="/js/uikit.js"></script>
+    <script src="/js/uikit-icons.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=c5478f24-6c68-4155-a9bd-78cd96cca754&lang=ru_RU"
+            type="text/javascript">
     </script>
     <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/scripts.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <header class="header">
-        <div class="container flex header-container">
-            <div class="header-upper-content flex">
-                <a href="@Url.Action("Index")" class="header-logo">
-                    <img src="/img/logo.png" alt="logo" class="header-logo-image">
-                </a>
-            </div>
-            <div class="header-bottom-content flex">
-                <nav class="header-nav flex">
-                    <ul class="list-resert header-list flex">
-                        <li class="header-list-item">
-                            <a href="@Url.Action("Index")" class="header-link">
-                                Главная
-                            </a>
-                        </li>
-                        <li class="header-list-item">
-                            <a href="@Url.Action("AboutUs")" class="header-link">
-                                О&nbsp;нас
-                            </a>
-                        </li>
-                        <li class="header-list-item">
-                            <a href="@Url.Action("AdsMap")" class="header-link">
-                                Объявления
-                            </a>
-                        </li>
-                        <li class="header-list-item">
-                            <a href="@Url.Action("Contacts")" class="header-link">
-                                Контакты
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="header-btns">
-                    @{
-                        if (this.User.Identity.IsAuthenticated)
-                        {
-                            <a href="@Url.Action("Logout")"
-                           class="header-button header-button-want-tour standart-btn"> Выход </a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("LoginView")"
-                           class="header-button header-button-want-tour standart-btn"> Войти </a>
+    <header>
+        <nav class="uk-navbar-container uk-margin">
+            <div class="uk-navbar-justify" uk-navbar>
 
-                            <a href="@Url.Action("Registration")"
-                           class="header-button header-button-want-tour standart-btn"> Регистрация </a>
-                        }
-                    }
-                </div>
-            </div>
-        </div>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="#">Лого</a>
+
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-active"><a href="@Url.Action("Index")">Главная</a></li>
+                        <li>
+                            <a href="#">Объявления <span uk-icon="icon:  triangle-down"></span></a>
+                            <div uk-dropdown>
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li class="uk-nav-header">Объявления</li>
+                                    <li><a href="@Url.Action("GetAds")">Карта объявлений</a></li>
+                                    <li><a href="#">Список объявлений</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="@Url.Action("CreateAdView")">Создать объявление</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="@Url.Action("AboutUs")">О нас</a></li>
+                        <li><a href="@Url.Action("Contacts")">Контакты</a></li>
+                    </ul>
+                </div><!-- // .uk-navbar-left -->
+
+                <div class="uk-navbar-right">
+                    <div class="uk-navbar-item">
+                        <ul class="uk-grid-small" uk-grid>
+                            @{
+                                if (this.User.Identity.IsAuthenticated)
+                                {
+                                    <li>
+                                        <a class="uk-button uk-button-default" href="@Url.Action("Logout", "User")">
+                                            Выход
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a class="uk-button uk-button-default" onclick="showModal()" href="#modal-login">Вход</a>
+                                    </li>
+                                    <li>
+                                        <a class="uk-button uk-button-default" href="@Url.Action("Registration")">Регистрация</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div><!-- // .uk-navbar-right -->
+            </div><!-- // .uk-navbar-justify -->
+        </nav>
     </header>
     <main>
-        @RenderBody()
+        @RenderBody();
     </main>
     <footer>
     </footer>
+    <div id="modal-login" class="uk-flex-top" uk-modal>
+        <div class="uk-modal-dialog uk-margin-auto-vertical uk-modal-dialog-login">
+            <form asp-action="Login" asp-controller="User" asp-antiforgery="true">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                    <input class="uk-input" type="text" name="login">
+                </div>
+                <br>
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                    <input class="uk-input" type="password" name="password">
+                </div>
+
+                <div class="uk-margin uk-text-center">
+                    <button type="submit" class="uk-button uk-button-default">Вход</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

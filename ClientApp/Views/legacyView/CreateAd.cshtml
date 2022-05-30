@@ -1,0 +1,44 @@
+﻿<section>
+    <div class="container">
+        <form name="create-ad" asp-action="CreateAd" asp-controller="Home" asp-antiforgery="true" enctype="multipart/form-data">
+            <div class="create-ad-form flex">
+                <div class="create-ad-form-col flex">
+                    <label class="create-ad-form-item">Название</label>
+                    <label class="create-ad-form-item">Описание</label>
+                    <label class="create-ad-form-item">Вид животного</label>
+                    <label class="create-ad-form-item">Окрас</label>
+                    <label class="create-ad-form-item">Выбрать фотографии</label>
+                </div>
+                <div class="create-ad-form-col flex">
+                    <input class="create-ad-form-item" type="text" name="name" />
+                    <input class="create-ad-form-item" type="text" name="description" />
+                    <input class="create-ad-form-item" type="text" name="kindofanimal" />
+                    <input class="create-ad-form-item" type="text" name="color" />
+                </div>
+            </div>
+            <br />
+            <input type="file" accept=".jpg,.jpeg,.png" name="photo" multiple />
+            <br />
+            <p>Выберите тип объявления:</p>
+            <div>
+                <input type="radio" id="loss" name="typead" value="loss" />
+                <label for="loss">Потеря</label>
+                <input type="radio" id="find" name="typead" value="find" />
+                <label for="find">Находка</label>
+            </div>
+            <div>
+                <p class="header">Кликните по карте, чтобы узнать адрес</p>
+                <input class="create-ad-form-item-buttom" type="text" name="address" id="address" readonly>
+                <div id="map" style="width: 600px; height: 400px"></div>
+            </div>
+            <div>
+                <input class="create-ad-form-item-buttom" type="text" name="latitude" id="latitude" readonly>
+                <input class="create-ad-form-item-buttom" type="text" name="longitude" id="longitude" readonly>
+            </div>
+            <br />
+            <input type="submit" />
+            <input type="reset" />
+        </form>
+    </div>
+    <script src="/js/createAdMap.js" type="text/javascript"></script>
+</section>

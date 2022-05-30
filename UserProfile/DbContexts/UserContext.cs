@@ -7,11 +7,14 @@ namespace UserProfile.DbContexts
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
-            if (Database.EnsureCreated())
-            {
-                Users.Add(new AdminUser("admin", "admin"));
-                SaveChanges();
-            }
+            Database.EnsureCreated();
+
+            if (Users.Any(u => u.Login == "admin" && u.Password == "admin"))
+                return;
+
+            Users.Add(new AdminUser("admin", "admin"));
+            SaveChanges();
+
         }
 
         public DbSet<User> Users { get; set; }

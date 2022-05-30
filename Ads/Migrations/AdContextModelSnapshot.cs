@@ -22,29 +22,19 @@ namespace Ads.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Ads.Models.Ad", b =>
+            modelBuilder.Entity("Model.Ads.Ad", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateCreate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KindOfAnimal")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StatusAd")
@@ -58,7 +48,7 @@ namespace Ads.Migrations
                     b.ToTable("Ads");
                 });
 
-            modelBuilder.Entity("Ads.Models.AdCoordinates", b =>
+            modelBuilder.Entity("Model.Ads.AdCoordinates", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
@@ -68,10 +58,12 @@ namespace Ads.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(36, 18)
+                        .HasColumnType("decimal(36,18)");
 
                     b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(36, 18)
+                        .HasColumnType("decimal(36,18)");
 
                     b.HasKey("Guid");
 
@@ -81,7 +73,76 @@ namespace Ads.Migrations
                     b.ToTable("AdCoordinates");
                 });
 
-            modelBuilder.Entity("Ads.Models.Image", b =>
+            modelBuilder.Entity("Model.Ads.Animals.Animal", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AdGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AnimalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ColorOfAnimalGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("KindOfAnimalGuid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SexAnimal")
+                        .HasColumnType("int");
+
+                    b.HasKey("Guid");
+
+                    b.HasIndex("AdGuid")
+                        .IsUnique();
+
+                    b.ToTable("Animals");
+                });
+
+            modelBuilder.Entity("Model.Ads.Animals.ColorOfAnimal", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ColorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOtherColor")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OtherColorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Guid");
+
+                    b.ToTable("ColorsOfAnimals");
+                });
+
+            modelBuilder.Entity("Model.Ads.Animals.KindOfAnimal", b =>
+                {
+                    b.Property<Guid>("Guid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsOtherKindName")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("KindName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherKindName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Guid");
+
+                    b.ToTable("KindsOfAnimals");
+                });
+
+            modelBuilder.Entity("Model.Ads.Image", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
@@ -91,7 +152,6 @@ namespace Ads.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("ImageHash")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Guid");
@@ -101,28 +161,44 @@ namespace Ads.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("Ads.Models.AdCoordinates", b =>
+            modelBuilder.Entity("Model.Ads.AdCoordinates", b =>
                 {
-                    b.HasOne("Ads.Models.Ad", null)
+                    b.HasOne("Model.Ads.Ad", "Ad")
                         .WithOne("Coordinates")
-                        .HasForeignKey("Ads.Models.AdCoordinates", "AdGuid")
+                        .HasForeignKey("Model.Ads.AdCoordinates", "AdGuid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Ad");
                 });
 
-            modelBuilder.Entity("Ads.Models.Image", b =>
+            modelBuilder.Entity("Model.Ads.Animals.Animal", b =>
                 {
-                    b.HasOne("Ads.Models.Ad", null)
+                    b.HasOne("Model.Ads.Ad", "Ad")
+                        .WithOne("Animal")
+                        .HasForeignKey("Model.Ads.Animals.Animal", "AdGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ad");
+                });
+
+            modelBuilder.Entity("Model.Ads.Image", b =>
+                {
+                    b.HasOne("Model.Ads.Ad", "Ad")
                         .WithMany("Photo")
                         .HasForeignKey("AdGuid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Ad");
                 });
 
-            modelBuilder.Entity("Ads.Models.Ad", b =>
+            modelBuilder.Entity("Model.Ads.Ad", b =>
                 {
-                    b.Navigation("Coordinates")
-                        .IsRequired();
+                    b.Navigation("Animal");
+
+                    b.Navigation("Coordinates");
 
                     b.Navigation("Photo");
                 });

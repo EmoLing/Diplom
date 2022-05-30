@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Helper.Users.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel 
     {
+        public Guid Guid { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
 

@@ -54,13 +54,16 @@ namespace UserProfile
             return Ok();
         }
 
-        // POST api/<UserController>/Login
-        [HttpPost]
-        [Route("Login")]
-        public IActionResult Login(UserViewModel userViewModel)
+        // Get api/<UserController>/Login
+        [HttpGet]
+        [Route("Login/{login}&{password}")]
+        public IActionResult Login(string login, string password)
         {
-            var user = _usersRepository.FindUser(userViewModel);
-            return user is null ? ValidationProblem("Пользователь не найден") : Ok();
+            var user = _usersRepository.FindUser(new UserViewModel() {Login = login, Password = password });
+            if (user is null)
+                return Problem("Пользователь не найден");
+
+            return new OkObjectResult(user.Guid);
         }
 
         // PUT api/<UserController>/5

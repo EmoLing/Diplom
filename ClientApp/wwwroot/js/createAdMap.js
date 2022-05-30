@@ -58,6 +58,7 @@ function init() {
     function getAddress(coords) {
         myPlacemark.properties.set('iconCaption', 'поиск...');
         ymaps.geocode(coords).then(function (res) {
+            let coordinates = res.geocoder.request;
             var firstGeoObject = res.geoObjects.get(0),
                 address = firstGeoObject.getAddressLine();
 
@@ -74,7 +75,6 @@ function init() {
                     balloonContent: address
                 });
             let form = document.forms["create-ad"];
-            let coordinates = firstGeoObject.geometry.getCoordinates();
 
             form.elements.address.value = address;
             form.elements.latitude.value = coordinates[0];

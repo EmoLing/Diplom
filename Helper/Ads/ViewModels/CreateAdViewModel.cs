@@ -1,5 +1,4 @@
-﻿using Helper.Ads.Enums;
-using Helper.Images;
+﻿using Helper.Images;
 using Microsoft.AspNetCore.Http;
 
 namespace Helper.Ads.ViewModels
@@ -8,19 +7,24 @@ namespace Helper.Ads.ViewModels
     {
         public IFormFileCollection Photo { get; set; }
 
-        public static implicit operator AdViewModel(CreateAdViewModel adViewModel)
+        public static implicit operator AdViewModel(CreateAdViewModel createAdViewModel)
         {
-            return new AdViewModel()
+            var typeCreateAdViewModel = typeof(CreateAdViewModel);
+            var typeAdViewModel = typeof(AdViewModel);
+            var adViewModel = new AdViewModel();
+
+            foreach (var property in typeCreateAdViewModel.GetProperties())
             {
-                Name = adViewModel.Name,
-                Description = adViewModel.Description,
-                Color = adViewModel.Color,
-                KindOfAnimal = adViewModel.KindOfAnimal,
-                Latitude = adViewModel.Latitude,
-                Longitude = adViewModel.Longitude,
-                TypeAd = adViewModel.TypeAd,
-                Photo = ImageHelper.GetImageFromRequest(adViewModel.Photo)
-            };
+                if (property.Name == "Photo")
+                {
+                    continue;
+                }
+
+                typeAdViewModel.GetProperty(property.Name)
+                    .SetValue(adViewModel, property.GetValue(createAdViewModel));
+            }
+
+            return adViewModel;
         }
     }
 }

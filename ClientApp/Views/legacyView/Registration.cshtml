@@ -1,0 +1,25 @@
+﻿<section>
+    <div class="container">
+        <div class="result">
+            @ViewBag.Result
+        </div>
+        <form asp-action="SendRegistrate" asp-controller="Home" asp-antiforgery="true">
+            <label>Логин</label>
+            <input type="text" name="login" />
+            <br />
+            <label>Пароль</label>
+            <input type="password" name="password" />
+            <br />
+            <label>Имя</label>
+            <input type="text" name="firstname" />
+            <br />
+            <label>Фамилия</label>
+            <input type="text" name="lastname" />
+            <br />
+            <label>E-mail</label>
+            <input type="email" name="email" />
+            <br />
+            <input type="submit" />
+        </form>
+    </div>
+</section>

@@ -1,8 +1,8 @@
 ﻿using Ads.Repository;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
 using Helper.Ads.ViewModels;
-using Ads.Models;
+using Microsoft.AspNetCore.Mvc;
+using Model.Ads;
+using Model.Ads.Animals;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ads.Controllers
@@ -40,9 +40,17 @@ namespace Ads.Controllers
             {
                 Name = adViewModel.Name,
                 Description = adViewModel.Description,
-                KindOfAnimal = adViewModel.KindOfAnimal,
-                Color = adViewModel.Color,
             };
+
+            var animal = new Animal()
+            {
+                Ad = ad,
+                AdGuid = ad.Guid,
+                AnimalName = adViewModel.Name,
+                SexAnimal = adViewModel.SexAnimal
+            };
+
+            ad.Animal = animal;
 
             ad.Coordinates = new AdCoordinates(ad.Guid)
             {
@@ -58,7 +66,7 @@ namespace Ads.Controllers
 
             try
             {
-                _adsRepository.CreateAd(ad);
+                _adsRepository.CreateAd(ad, adViewModel);
             }
             catch (Exception ex)
             {

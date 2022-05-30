@@ -1,4 +1,4 @@
-﻿ymaps.ready(init);
+ymaps.ready(init);
 function init() {
     var myPlacemark;
     var myMap;
@@ -22,5 +22,35 @@ function init() {
 
     function createMap(state) {
         myMap = new ymaps.Map('map', state);
+
+        $(function () {
+            let list = $('#ad-photo-list').children();
+            for (var i = 0; i < list.length; i++) {
+                let latitude = list[i].getAttribute("data-latitude");
+                let longitude = list[i].getAttribute("data-longitude");
+
+                let coordinates = {
+                    latitude: latitude,
+                    longitude: longitude,
+                };
+                setPlaceHolders(coordinates);
+            }
+        })
+
+        function setPlaceHolders(coordinates) {
+            var placemark = new ymaps.Placemark([coordinates.latitude, coordinates.longitude], {
+                hintContent: 'Собственный значок метки',
+                balloonContent: 'Это красивая метка'
+            }
+                , {
+                    iconLayout: 'default#image',
+                    iconImageHref: "/icons/cat.gif",
+                    iconImageSize: [30, 42],
+                });
+
+            myMap.geoObjects.add(placemark);
+        }
     }
 }
+
+
