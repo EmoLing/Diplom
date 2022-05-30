@@ -9,7 +9,8 @@
                     <ul class="uk-list" id="ad-photo-list">
                         @foreach (var ad in Model)
                         {
-                            <li data-latitude="@ad.Coordinates.Latitude.ToString().Replace(',', '.')"
+                            <li data-kind-of-animal="@GetIconKindOfAnimal(ad.Animal.KindOfAnimalGuid.ToString())"
+                            data-latitude="@ad.Coordinates.Latitude.ToString().Replace(',', '.')"
                             data-longitude="@ad.Coordinates.Longitude.ToString().Replace(',', '.')">
                                 <div class="uk-card uk-card-default uk-width-1-1@m">
                                     <div class="uk-card-header">
@@ -145,3 +146,13 @@
     </div>
     <script src="/js/adMap.js" type="text/javascript"></script>
 </section>
+
+@{
+    string GetIconKindOfAnimal(string guid) => guid switch
+    {
+        "986c08c9-4392-4d36-a614-e8994ebec8f2" => "986c08c9-4392-4d36-a614-e8994ebec8f2.gif",
+        "11ba9e6e-ec89-47dc-97bb-32b877cf07f6" => "11ba9e6e-ec89-47dc-97bb-32b877cf07f6.gif",
+        "05bd0208-dcaa-4c18-a303-f79aa04e7d6f" => "05bd0208-dcaa-4c18-a303-f79aa04e7d6f.gif",
+        _ => "other.gif"
+    };
+}

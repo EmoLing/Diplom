@@ -5,11 +5,15 @@ namespace Model.Ads
 {
     public class Image
     {
-        public Guid Guid { get; }
-        public Guid AdGuid { get; private set; }
-        [JsonIgnore]
-        public Ad Ad { get; private set; }
+        public Guid Guid { get; set; }
+        public Guid AdGuid { get; set; }
+        public Ad Ad { get; set; }
         public byte[] ImageHash { get; set; }
+
+        public Image()
+        {
+
+        }
 
         public Image(Guid adGuid)
         {

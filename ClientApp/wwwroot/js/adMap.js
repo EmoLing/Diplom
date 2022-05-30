@@ -28,23 +28,25 @@ function init() {
             for (var i = 0; i < list.length; i++) {
                 let latitude = list[i].getAttribute("data-latitude");
                 let longitude = list[i].getAttribute("data-longitude");
-
+                let dataKindOfAnimal = '/icons/' + list[i].getAttribute("data-kind-of-animal");
                 let coordinates = {
                     latitude: latitude,
                     longitude: longitude,
                 };
-                setPlaceHolders(coordinates);
+
+                setPlaceHolders(coordinates, dataKindOfAnimal);
             }
         })
 
-        function setPlaceHolders(coordinates) {
+        function setPlaceHolders(coordinates, dataKindOfAnimal) {
+
             var placemark = new ymaps.Placemark([coordinates.latitude, coordinates.longitude], {
                 hintContent: 'Собственный значок метки',
                 balloonContent: 'Это красивая метка'
             }
                 , {
                     iconLayout: 'default#image',
-                    iconImageHref: "/icons/cat.gif",
+                    iconImageHref: dataKindOfAnimal,
                     iconImageSize: [30, 42],
                 });
 

@@ -7,10 +7,14 @@ namespace Model.Ads
     {
         public Guid Guid { get; }
         public Guid AdGuid { get; private set; }
-        [JsonIgnore]
         public Ad Ad { get; private set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+
+        public AdCoordinates()
+        {
+
+        }
 
         public AdCoordinates(Guid adGuid)
         {

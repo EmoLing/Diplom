@@ -20,6 +20,9 @@
                         <select class="uk-select" id="kindofanimals" name="kindofanimal">
                             @foreach (var kind in Model.KindOfAnimals)
                             {
+                                System.Diagnostics.Debugger.Launch();
+                                System.Diagnostics.Debugger.Break();
+
                                 <option value="@kind.Guid">@kind.KindName</option>
                             }
 

@@ -52,9 +52,10 @@ namespace AnimalManagement.DbContexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ad>().HasKey(a => a.Guid);
-            modelBuilder.Entity<AdCoordinates>().HasKey(a => a.Guid);
-            modelBuilder.Entity<Image>().HasKey(a => a.Guid);
+            modelBuilder.Entity<AdCoordinates>().HasKey(a => a.AdGuid);
+            modelBuilder.Entity<Image>().HasKey(a => a.AdGuid);
             modelBuilder.Entity<Animal>().HasKey(a => a.Guid);
+            modelBuilder.Entity<Animal>().HasKey(a => a.AdGuid);
             modelBuilder.Entity<ColorOfAnimal>().HasKey(a => a.Guid);
             modelBuilder.Entity<KindOfAnimal>().HasKey(a => a.Guid);
 
@@ -66,6 +67,21 @@ namespace AnimalManagement.DbContexts
             modelBuilder.Entity<Image>()
                 .HasOne(a => a.Ad)
                 .WithMany(im => im.Photo);
+
+            modelBuilder.Entity<Ad>()
+                .HasOne(a => a.Animal)
+                .WithOne(an => an.Ad)
+                .HasForeignKey<Animal>(an => an.AdGuid);
+
+            modelBuilder.Entity<Animal>()
+                .HasOne<KindOfAnimal>()
+                .WithMany()
+                .HasForeignKey(a => a.KindOfAnimalGuid);
+
+            modelBuilder.Entity<Animal>()
+                .HasOne<ColorOfAnimal>()
+                .WithMany()
+                .HasForeignKey(a => a.ColorOfAnimalGuid);
 
             modelBuilder.Entity<AdCoordinates>().Property(a => a.Latitude).HasPrecision(36, 18);
             modelBuilder.Entity<AdCoordinates>().Property(a => a.Longitude).HasPrecision(36, 18);

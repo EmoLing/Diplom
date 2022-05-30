@@ -11,7 +11,6 @@ namespace Model.Ads.Animals
     {
         public Guid Guid { get; }
         public string AnimalName { get; set; }
-        [JsonIgnore]
         public Ad Ad { get; set; }
         public Guid AdGuid { get; set; }
         public Guid KindOfAnimalGuid { get; set; }

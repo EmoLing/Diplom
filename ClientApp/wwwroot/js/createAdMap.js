@@ -58,7 +58,7 @@ function init() {
     function getAddress(coords) {
         myPlacemark.properties.set('iconCaption', 'поиск...');
         ymaps.geocode(coords).then(function (res) {
-            let coordinates = res.geocoder.request;
+            let coordinates = res.metaData.geocoder.request.split(',');
             var firstGeoObject = res.geoObjects.get(0),
                 address = firstGeoObject.getAddressLine();
 

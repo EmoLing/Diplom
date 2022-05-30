@@ -35,12 +35,16 @@ namespace ClientApp.Controllers
         }
 
         public IActionResult Registration() => View("Registration");
+
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> AdsMap()
         {
             var ads = await GetRequest<List<Ad>>("https://localhost:7155/api/Ads");
             return View("AdsMap", ads);
         }
         public IActionResult LoginView() => View("Registration");
+
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> CreateAdView()
         {
             if (!User.Identity.IsAuthenticated)
@@ -65,6 +69,7 @@ namespace ClientApp.Controllers
 
         [Authorize]
         [HttpPost]
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> CreateAd(AdViewModel adViewModel)
         {
             var guid = Guid.Parse(User.FindFirst("Guid").Value);

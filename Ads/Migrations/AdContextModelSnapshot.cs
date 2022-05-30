@@ -50,10 +50,6 @@ namespace Ads.Migrations
 
             modelBuilder.Entity("Model.Ads.AdCoordinates", b =>
                 {
-                    b.Property<Guid>("Guid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("AdGuid")
                         .HasColumnType("uniqueidentifier");
 
@@ -65,20 +61,13 @@ namespace Ads.Migrations
                         .HasPrecision(36, 18)
                         .HasColumnType("decimal(36,18)");
 
-                    b.HasKey("Guid");
-
-                    b.HasIndex("AdGuid")
-                        .IsUnique();
+                    b.HasKey("AdGuid");
 
                     b.ToTable("AdCoordinates");
                 });
 
             modelBuilder.Entity("Model.Ads.Animals.Animal", b =>
                 {
-                    b.Property<Guid>("Guid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("AdGuid")
                         .HasColumnType("uniqueidentifier");
 
@@ -88,16 +77,20 @@ namespace Ads.Migrations
                     b.Property<Guid>("ColorOfAnimalGuid")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("KindOfAnimalGuid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SexAnimal")
                         .HasColumnType("int");
 
-                    b.HasKey("Guid");
+                    b.HasKey("AdGuid");
 
-                    b.HasIndex("AdGuid")
-                        .IsUnique();
+                    b.HasIndex("ColorOfAnimalGuid");
+
+                    b.HasIndex("KindOfAnimalGuid");
 
                     b.ToTable("Animals");
                 });
@@ -144,19 +137,22 @@ namespace Ads.Migrations
 
             modelBuilder.Entity("Model.Ads.Image", b =>
                 {
-                    b.Property<Guid>("Guid")
+                    b.Property<Guid>("AdGuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AdGuid")
+                    b.Property<Guid>("AdGuid1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("ImageHash")
                         .HasColumnType("varbinary(max)");
 
-                    b.HasKey("Guid");
+                    b.HasKey("AdGuid");
 
-                    b.HasIndex("AdGuid");
+                    b.HasIndex("AdGuid1");
 
                     b.ToTable("Images");
                 });
@@ -180,6 +176,18 @@ namespace Ads.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Model.Ads.Animals.ColorOfAnimal", null)
+                        .WithMany()
+                        .HasForeignKey("ColorOfAnimalGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Ads.Animals.KindOfAnimal", null)
+                        .WithMany()
+                        .HasForeignKey("KindOfAnimalGuid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Ad");
                 });
 
@@ -187,7 +195,7 @@ namespace Ads.Migrations
                 {
                     b.HasOne("Model.Ads.Ad", "Ad")
                         .WithMany("Photo")
-                        .HasForeignKey("AdGuid")
+                        .HasForeignKey("AdGuid1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

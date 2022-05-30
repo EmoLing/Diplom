@@ -32,6 +32,7 @@ namespace Ads.Repository
                 _dbContext.KindsOfAnimals.Add(kindOfAnimal);
 
                 ad.Animal.KindOfAnimalGuid = kindOfAnimal.Guid;
+                _dbContext.SaveChanges();
             }
 
             if (String.IsNullOrEmpty(adViewModel.OtherColor))
@@ -50,12 +51,19 @@ namespace Ads.Repository
                 _dbContext.ColorsOfAnimals.Add(colorOfAnimal);
 
                 ad.Animal.ColorOfAnimalGuid = colorOfAnimal.Guid;
+                _dbContext.SaveChanges();
             }
 
-            _dbContext.Ads.Add(ad);
             _dbContext.Animals.Add(ad.Animal);
+            _dbContext.SaveChanges();
+
             _dbContext.Images.AddRange(ad.Photo);
+            _dbContext.SaveChanges();
+
             _dbContext.AdCoordinates.Add(ad.Coordinates);
+            _dbContext.SaveChanges();
+
+            _dbContext.Ads.Add(ad);
 
             _dbContext.SaveChanges();
         }
@@ -76,11 +84,16 @@ namespace Ads.Repository
             _dbContext.Animals.Load();
             _dbContext.KindsOfAnimals.Load();
             _dbContext.ColorsOfAnimals.Load();
-            return _dbContext.Ads
-                .Include(a => a.Coordinates)
-                .Include(a => a.Photo)
-                .Include(a => a.Animal)
-                .ToList();
+
+            return _dbContext.Ads.ToList();
+
+            //return _dbContext.Ads
+            //    .Include(a => a.Coordinates)
+            //    .Include(a => a.Photo)
+            //    .Include(a => a.Animal)
+            //    .Include(a => a.Animal.KindOfAnimalGuid)
+            //    .Include(a => a.Animal.ColorOfAnimalGuid)
+            //    .ToList();
         }
 
 

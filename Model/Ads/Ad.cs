@@ -8,7 +8,6 @@ namespace Model.Ads
 {
     public class Ad : IAd
     {
-        [Key]
         public Guid Guid { get; }
         public string Name { get; set; }
         public Animal Animal { get; set; }
