@@ -31,7 +31,7 @@ namespace Ads.Controllers
         // POST api/<AdsController>
         [HttpPost]
         [Route("CreateAd")]
-        public IActionResult CreateAd(AdViewModel adViewModel)
+        public async Task<IActionResult> CreateAd(AdViewModel adViewModel)
         {
             if (adViewModel is null)
                 return BadRequest();
@@ -47,7 +47,9 @@ namespace Ads.Controllers
                 Ad = ad,
                 AdGuid = ad.Guid,
                 AnimalName = adViewModel.Name,
-                SexAnimal = adViewModel.SexAnimal
+                SexAnimal = adViewModel.SexAnimal,
+                KindOfAnimalGuid = adViewModel.KindOfAnimal,
+                ColorOfAnimalGuid = adViewModel.Color
             };
 
             ad.Animal = animal;
@@ -66,7 +68,7 @@ namespace Ads.Controllers
 
             try
             {
-                _adsRepository.CreateAd(ad, adViewModel);
+                _adsRepository.CreateAd(ad);
             }
             catch (Exception ex)
             {

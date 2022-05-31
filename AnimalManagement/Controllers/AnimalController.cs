@@ -1,4 +1,5 @@
 ﻿using AnimalManagement.Repository;
+using Helper.Ads.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Ads.Animals;

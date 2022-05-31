@@ -14,54 +14,12 @@ namespace Ads.Repository
             _dbContext = adContext;
         }
 
-        public void CreateAd(Ad ad, AdViewModel adViewModel)
+        public void CreateAd(Ad ad)
         {
-            if (String.IsNullOrEmpty(adViewModel.OtherKind))
-            {
-                var kind = _dbContext.KindsOfAnimals.FirstOrDefault();
-                ad.Animal.KindOfAnimalGuid = kind.Guid;
-            }
-            else
-            {
-                var kindOfAnimal = new KindOfAnimal()
-                {
-                    IsOtherKindName = true,
-                    OtherKindName = adViewModel.OtherKind
-                };
-
-                _dbContext.KindsOfAnimals.Add(kindOfAnimal);
-
-                ad.Animal.KindOfAnimalGuid = kindOfAnimal.Guid;
-                _dbContext.SaveChanges();
-            }
-
-            if (String.IsNullOrEmpty(adViewModel.OtherColor))
-            {
-                var color = _dbContext.ColorsOfAnimals.FirstOrDefault();
-                ad.Animal.ColorOfAnimalGuid = color.Guid;
-            }
-            else
-            {
-                var colorOfAnimal = new ColorOfAnimal()
-                {
-                    IsOtherColor = true,
-                    OtherColorName = adViewModel.OtherKind
-                };
-
-                _dbContext.ColorsOfAnimals.Add(colorOfAnimal);
-
-                ad.Animal.ColorOfAnimalGuid = colorOfAnimal.Guid;
-                _dbContext.SaveChanges();
-            }
+            _dbContext.Images.AddRange(ad.Photo);
+            _dbContext.AdCoordinates.Add(ad.Coordinates);
 
             _dbContext.Animals.Add(ad.Animal);
-            _dbContext.SaveChanges();
-
-            _dbContext.Images.AddRange(ad.Photo);
-            _dbContext.SaveChanges();
-
-            _dbContext.AdCoordinates.Add(ad.Coordinates);
-            _dbContext.SaveChanges();
 
             _dbContext.Ads.Add(ad);
 
@@ -81,11 +39,15 @@ namespace Ads.Repository
         public IEnumerable<Ad> GetAds()
         {
             _dbContext.Ads.Load();
+            _dbContext.AdCoordinates.Load();
+            _dbContext.Images.Load();
             _dbContext.Animals.Load();
             _dbContext.KindsOfAnimals.Load();
             _dbContext.ColorsOfAnimals.Load();
 
-            return _dbContext.Ads.ToList();
+            return _dbContext.Ads
+                .Include(a => a.Coordinates)
+                .ToList();
 
             //return _dbContext.Ads
             //    .Include(a => a.Coordinates)
